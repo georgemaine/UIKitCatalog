@@ -1,4 +1,4 @@
-# UIKit Catalog: Creating and Customizing Views and Controls
+# UIKit catalog: creating and customizing views and controls
 
 Customize your app's user interface with views and controls.
 
@@ -37,11 +37,11 @@ This sample demonstrates the following views and controls; several of which are 
 * [UIVisualEffectView](https://developer.apple.com/documentation/uikit/uivisualeffect)
 * [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview)
 
-## Configure the Sample Code Project
+## Configure the sample code project
 
 In Xcode, select your development team on the iOS-Mac target's Signing and Capabilities tab.
 
-## Customize the Look of Buttons with Button Configurations
+## Customize the look of buttons with button configurations
 
 You can customize the appearance and behavior of a UIButton by using `UIButton.Configuration`. This sample uses a `filled()` configuration so that the button draws with a red background color:
 
@@ -51,7 +51,7 @@ config.background.backgroundColor = .systemRed
 button.configuration = config
 ```
 
-## Display a Custom Alert
+## Display a custom alert
 
 `AlertControllerViewController` demonstrates several techniques to display modal alerts and action sheets from an interface. The configuration process is similar for all alerts:
 
@@ -82,7 +82,7 @@ func showSimpleAlert() {
 }
 ```
 
-## Customize the Appearance of Sliders
+## Customize the appearance of sliders
 
 This sample demonstrates different ways to display a `UISlider`, a control to select a single value from a continuous range of values. Customize the appearance of a slider by assigning stretchable images for left-side tracking, right-side tracking, and the thumb. In this example, the track image is stretchable and is one pixel wide. Make the track images wider to provide rounded corners, but be sure to set these images' `capInsets` property to allow for the corners.
 
@@ -131,7 +131,7 @@ func configureCustomSlider(slider: UISlider) {
 }
 ```
 
-## Add a Search Bar to an Interface
+## Add a search bar to an interface
 
 Use a `UISearchBar` to receive search-related information from the user. There are various ways to customize the look of the search bar:
 
@@ -161,7 +161,7 @@ func configureSearchBar() {
 }
 ```
 
-## Customize the Appearance of Toolbars
+## Customize the appearance of toolbars
 
 This sample shows how to customize a `UIToolbar`, a specialized view that displays one or more buttons along the bottom edge of an interface. Customize a toolbar by determining its bar style (black or default), translucency, tint color, and background color.
 
@@ -205,7 +205,7 @@ override func viewDidLoad() {
 }
 ```
 
-## Add a Page Control Interface
+## Add a page control interface
 
 Use a `UIPageControl` to structure an app's user interface. A *page control* is a specialized control that displays a horizontal series of dots, each of which corresponds to a page in the app’s document or other data-model entity. Customize a page control by setting its tint color for all the page-indicator dots, and for the current page-indicator dot.
 
@@ -224,7 +224,7 @@ func configurePageControl() {
 }
 ```
 
-## Add Menus to Controls
+## Add menus to controls
 
 Attach menus to controls like `UIButton` and `UIBarButtonItem`. Create menus with the [`UIAction`](https://developer.apple.com/documentation/uikit/uiaction) class, and attach a menu to each control by setting the [`UIMenu`](https://developer.apple.com/documentation/uikit/uimenu) property.
 
@@ -255,7 +255,7 @@ var customTitleBarButtonItem: UIBarButtonItem {
 }
 ```
 
-## Add Accessibility Support to Your Views
+## Add accessibility support to your views
 
 VoiceOver and other system accessibility technologies use the information provided by views and controls to help all users navigate content. UIKit views include default accessibility support. Improve user experience by providing custom accessibility information.
 

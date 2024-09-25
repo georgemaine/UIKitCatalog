@@ -1,5 +1,5 @@
 /*
-See LICENSE folder for this sample’s licensing information.
+See the LICENSE.txt file for this sample’s licensing information.
 
 Abstract:
 A simple outline view for the sample app's main UI
@@ -38,8 +38,6 @@ class OutlineViewController: UIViewController {
 
     var dataSource: UICollectionViewDiffableDataSource<Section, OutlineItem>! = nil
     var outlineCollectionView: UICollectionView! = nil
-
-    private var detailTargetChangeObserver: Any? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,28 +51,22 @@ class OutlineViewController: UIViewController {
           
         // Listen for when the split view controller is expanded or collapsed for iPad multi-tasking,
         // and on device rotate (iPhones that support regular size class).
-        detailTargetChangeObserver =
-            NotificationCenter.default.addObserver(forName: UIViewController.showDetailTargetDidChangeNotification,
-                                                   object: nil,
-                                                   queue: OperationQueue.main,
-                                                   using: { _ in
-                // Posted when a split view controller is expanded or collapsed.
-                                                                        
-                // Re-load the data source, the disclosure indicators need to change (push vs. present on a cell).
-                var snapshot = self.dataSource.snapshot()
-                snapshot.reloadItems(self.menuItems)
-                self.dataSource.apply(snapshot, animatingDifferences: false)
-            })
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showDetailTargetChangeObserved),
+                                               name: UIViewController.showDetailTargetDidChangeNotification,
+                                               object: nil)
         
         if navigationController!.traitCollection.userInterfaceIdiom == .mac {
             navigationController!.navigationBar.isHidden = true
         }
     }
     
-    deinit {
-        if let observer = detailTargetChangeObserver {
-            NotificationCenter.default.removeObserver(observer)
-        }
+    // Re-load the data source, the disclosure indicators need to change (push vs. present on a cell).
+    @objc
+    private func showDetailTargetChangeObserved() {
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadItems(menuItems)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     lazy var controlsOutlineItem: OutlineItem = {
