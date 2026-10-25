@@ -36,6 +36,13 @@ class DatePickerController: UIViewController {
         }
         
         configureDatePicker()
+
+        if #available(iOS 17, *) {
+            // Adjust the date picker style when the vertical size class changes.
+            registerForTraitChanges([UITraitVerticalSizeClass.self]) { (self: Self, _: UITraitCollection) in
+                self.updateDatePickerStyle()
+            }
+        }
     }
 
     // MARK: - Configuration
@@ -49,9 +56,8 @@ class DatePickerController: UIViewController {
         let now = Date()
         datePicker.minimumDate = now
 
-        // Decide the best date picker style based on the trait collection's vertical size.
-        datePicker.preferredDatePickerStyle = traitCollection.verticalSizeClass == .compact ? .compact : .inline
-        
+        updateDatePickerStyle()
+
         var dateComponents = DateComponents()
         dateComponents.day = 7
 
@@ -65,10 +71,18 @@ class DatePickerController: UIViewController {
         updateDatePickerLabel()
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        // Adjust the date picker style due to the trait collection's vertical size.
-        super.traitCollectionDidChange(previousTraitCollection)
+    // Decide the best date picker style based on the trait collection's vertical size.
+    func updateDatePickerStyle() {
         datePicker.preferredDatePickerStyle = traitCollection.verticalSizeClass == .compact ? .compact : .inline
+    }
+
+    // Before iOS 17, trait changes are only delivered through this override.
+    @available(iOS, deprecated: 17.0, message: "Use registerForTraitChanges instead.")
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if #unavailable(iOS 17) {
+            updateDatePickerStyle()
+        }
     }
     
     // MARK: - Actions

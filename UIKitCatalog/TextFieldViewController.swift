@@ -118,10 +118,11 @@ class TextFieldViewController: BaseTableViewController {
 
         // Create a purple button to be used as the right view of the custom text field.
         let purpleImage = UIImage(named: "text_field_purple_right_view")!
-        let purpleImageButton = UIButton(type: .custom)
+        var purpleButtonConfig = UIButton.Configuration.plain()
+        purpleButtonConfig.image = purpleImage
+        purpleButtonConfig.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 5)
+        let purpleImageButton = UIButton(configuration: purpleButtonConfig)
         purpleImageButton.bounds = CGRect(x: 0, y: 0, width: purpleImage.size.width, height: purpleImage.size.height)
-        purpleImageButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
-        purpleImageButton.setImage(purpleImage, for: .normal)
         purpleImageButton.addTarget(self, action: #selector(TextFieldViewController.customTextFieldPurpleButtonClicked), for: .touchUpInside)
         textField.rightView = purpleImageButton
         textField.rightViewMode = .always
